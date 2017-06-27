@@ -14,9 +14,10 @@ class JobBoardViewController: UITableViewController {
     var jobs = [Job]()
     var cellId = "cellId"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(handleLogout))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -27,9 +28,10 @@ class JobBoardViewController: UITableViewController {
         Database.database().reference().child("test").child("test2").observeSingleEvent(of: .value, with: { (snap) in
             //print(snap)
         }, withCancel: nil)*/
-        //checkIfUserIsLoggedIn()
+        checkIfUserIsLoggedIn()
         getJobs()
     }
+    
     
     func getJobs() {
         Database.database().reference().child("job").observe(.childAdded, with: { (snap) in
@@ -82,9 +84,9 @@ class JobBoardViewController: UITableViewController {
         } catch let logoutError {
             print(logoutError)
         }
-        
-        let loginController = LoginViewController()
-        present(loginController, animated: true, completion: nil)
+
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.present(vc, animated: true, completion: nil)
     }
     
 

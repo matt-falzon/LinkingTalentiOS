@@ -28,12 +28,15 @@ class LoginViewController: UIViewController {
                 return
             }
             print("Signed in")
+            self.login()
         }
-        /*
+    }
+    
+    func login(){
         if(Auth.auth().currentUser?.uid != nil)
         {
-        performSegue(withIdentifier: "LoginSegue", sender: nil)
-        }*/
+            performSegue(withIdentifier: "LoginSegue", sender: nil)
+        }
     }
     
     override func viewDidLoad() {
@@ -67,7 +70,7 @@ class LoginViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let jobBoardViewController = segue.destination as! JobBoardViewController
+        let jobBoardViewController = segue.destination as! UINavigationController
     }
     
 
